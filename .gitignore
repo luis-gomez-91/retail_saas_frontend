@@ -22,3 +22,13 @@ lerna-debug.log*
 # temp directory
 .temp
 .tmp
+
+# Next.js
+/.next/
+/out/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
