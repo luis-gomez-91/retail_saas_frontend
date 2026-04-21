@@ -1,88 +1,146 @@
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Tema base: paleta slate para texto/superficies con acentos indigo en selección.
+*/
 @layer base {
   .theme {
     --font-heading: var(--font-sans);
-    --font-sans: var(--font-sans)
+    --font-sans: var(--font-sans);
   }
+
   :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
+    --background: oklch(98.4% 0.003 247.858);
+    --foreground: #171717;
+    --card: #ffffff;
+    --card-foreground: #171717;
+    --popover: #ffffff;
+    --popover-foreground: #171717;
+    --primary: #4f46e5;
+    --primary-foreground: #ffffff;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #262626;
+    --muted: #f5f5f5;
+    --muted-foreground: #525252;
+    --accent: #f0f0f0;
+    --accent-foreground: #262626;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: red;
+    --chart-1: #4f46e5;
+    --chart-2: #6366f1;
+    --chart-3: #818cf8;
+    --chart-4: #a5b4fc;
+    --chart-5: #c7d2fe;
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0)
+    --sidebar: #ffffff;
+    --sidebar-foreground: #262626;
+    --sidebar-primary: #4f46e5;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #f0f0f0;
+    --sidebar-accent-foreground: #262626;
+    --sidebar-border: #e5e5e5;
+    --sidebar-ring: #6366f1;
+    --nav-accent: #4f46e5;
+    --nav-accent-soft: rgb(79 70 229 / 0.12);
+    --nav-accent-ring: rgb(129 140 248 / 0.45);
   }
+
+  /*
+    Login: claro con base slate y acentos indigo.
+    Aunque `html` tenga `.dark`, estos tokens pisan el aspecto del login.
+  */
+  .login-page-light {
+    color-scheme: light;
+    --background: oklch(98.4% 0.003 247.858);
+    --foreground: #171717;
+    --card: #ffffff;
+    --card-foreground: #171717;
+    --popover: #ffffff;
+    --popover-foreground: #171717;
+    --primary: #4f46e5;
+    --primary-foreground: #ffffff;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #262626;
+    --muted: #f5f5f5;
+    --muted-foreground: #525252;
+    --accent: #f0f0f0;
+    --accent-foreground: #262626;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #6366f1;
+    --chart-1: #4f46e5;
+    --chart-2: #6366f1;
+    --chart-3: #818cf8;
+    --chart-4: #a5b4fc;
+    --chart-5: #c7d2fe;
+    --radius: 0.625rem;
+    --sidebar: #fafafa;
+    --sidebar-foreground: #262626;
+    --sidebar-primary: #4f46e5;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #f0f0f0;
+    --sidebar-accent-foreground: #262626;
+    --sidebar-border: #e5e5e5;
+    --sidebar-ring: #6366f1;
+    --nav-accent: #4f46e5;
+    --nav-accent-soft: rgb(79 70 229 / 0.12);
+    --nav-accent-ring: rgb(129 140 248 / 0.45);
+  }
+
   .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0)
+    --background: #0f0f10;
+    --foreground: #f5f5f5;
+    --card: #18181b;
+    --card-foreground: #f5f5f5;
+    --popover: #18181b;
+    --popover-foreground: #f5f5f5;
+    --primary: #818cf8;
+    --primary-foreground: #111827;
+    --secondary: #262626;
+    --secondary-foreground: #e5e5e5;
+    --muted: #262626;
+    --muted-foreground: #a3a3a3;
+    --accent: #303030;
+    --accent-foreground: #f5f5f5;
+    --destructive: #f87171;
+    --destructive-foreground: #1f1111;
+    --border: #3f3f46;
+    --input: #3f3f46;
+    --ring: #818cf8;
+    --chart-1: #a5b4fc;
+    --chart-2: #818cf8;
+    --chart-3: #6366f1;
+    --chart-4: #4f46e5;
+    --chart-5: #4338ca;
+    --sidebar: #141415;
+    --sidebar-foreground: #d4d4d8;
+    --sidebar-primary: #818cf8;
+    --sidebar-primary-foreground: #111827;
+    --sidebar-accent: #262626;
+    --sidebar-accent-foreground: #f5f5f5;
+    --sidebar-border: #3f3f46;
+    --sidebar-ring: #818cf8;
+    --nav-accent: #a5b4fc;
+    --nav-accent-soft: rgb(129 140 248 / 0.18);
+    --nav-accent-ring: rgb(165 180 252 / 0.5);
   }
+
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
   html {
     @apply font-sans;
+    /* Evita que el ancho útil “salte” al aparecer/desaparecer la barra de scroll entre vistas. */
+    scrollbar-gutter: stable;
   }
 }

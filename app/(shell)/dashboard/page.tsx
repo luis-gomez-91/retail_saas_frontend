@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react'
 import { apiFetch, parseListPayload, ApiError } from '@/lib/api/client'
 import type {
   BillingAccount,
-  Empresa,
-  Organizacion,
+  Branch,
+  Company,
+  Organization,
   Subscription,
-  Sucursal,
 } from '@/lib/types/api'
 
 export default function DashboardPage() {
@@ -26,17 +26,17 @@ export default function DashboardPage() {
     ;(async () => {
       try {
         const [empresas, orgs, sucursales, subs, cuentas] = await Promise.all([
-          apiFetch<unknown>('/api/empresas/'),
-          apiFetch<unknown>('/api/organizaciones/'),
-          apiFetch<unknown>('/api/sucursales/'),
+          apiFetch<unknown>('/api/companies/'),
+          apiFetch<unknown>('/api/organizations/'),
+          apiFetch<unknown>('/api/branches/'),
           apiFetch<unknown>('/api/subscriptions/'),
           apiFetch<unknown>('/api/billing-accounts/'),
         ])
         if (cancelled) return
         setStats({
-          empresas: parseListPayload<Empresa>(empresas).length,
-          organizaciones: parseListPayload<Organizacion>(orgs).length,
-          sucursales: parseListPayload<Sucursal>(sucursales).length,
+          empresas: parseListPayload<Company>(empresas).length,
+          organizaciones: parseListPayload<Organization>(orgs).length,
+          sucursales: parseListPayload<Branch>(sucursales).length,
           suscripciones: parseListPayload<Subscription>(subs).length,
           cuentas: parseListPayload<BillingAccount>(cuentas).length,
         })
@@ -55,45 +55,22 @@ export default function DashboardPage() {
   const cards = stats
     ? [
         {
-          label: 'Empresas',
-          value: stats.empresas,
-          href: '/empresas',
+          label: 'Estructura (emp. · org. · suc.)',
+          value: `${stats.empresas} · ${stats.organizaciones} · ${stats.sucursales}`,
+          href: '/structures',
         },
-        {
-          label: 'Organizaciones',
-          value: stats.organizaciones,
-          href: '/organizaciones',
-        },
-        {
-          label: 'Sucursales',
-          value: stats.sucursales,
-          href: '/sucursales',
-        },
-        {
-          label: 'Suscripciones',
-          value: stats.suscripciones,
-          href: '/suscripciones',
-        },
-        {
-          label: 'Cuentas de facturación',
-          value: stats.cuentas,
-          href: '/facturacion',
-        },
+        { label: 'Suscripciones', value: stats.suscripciones, href: '/subscriptions' },
+        { label: 'Cuentas de facturación', value: stats.cuentas, href: '/billing' },
       ]
     : []
 
   return (
     <div className="mx-auto max-w-5xl space-y-8">
-      <div>
-        <h1 className="text-2xl font-semibold text-slate-900">Resumen</h1>
-        <p className="mt-1 text-slate-600">
-          Conteos según tu usuario (sin <code className="text-sm">is_staff</code> los listados
-          vienen filtrados por membresías a empresas, como en el backend).
-        </p>
-      </div>
-
       {error ? (
-        <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+        <p
+          className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive"
+          role="alert"
+        >
           {error}
         </p>
       ) : null}
@@ -101,38 +78,20 @@ export default function DashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {!stats && !error
           ? Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-28 animate-pulse rounded-xl bg-slate-200/80"
-              />
+              <div key={i} className="h-28 animate-pulse rounded-xl bg-muted" />
             ))
           : cards.map((c) => (
               <Link
                 key={c.href}
                 href={c.href}
-                className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+                className="rounded-xl border border-border bg-card p-5 text-card-foreground shadow-sm transition-shadow hover:border-border hover:shadow-md"
               >
-                <p className="text-sm font-medium text-slate-500">{c.label}</p>
-                <p className="mt-2 text-3xl font-semibold tabular-nums text-slate-900">
+                <p className="text-sm font-medium text-muted-foreground">{c.label}</p>
+                <p className="mt-2 text-3xl font-semibold tabular-nums text-foreground">
                   {c.value}
                 </p>
               </Link>
             ))}
-      </div>
-
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-semibold text-slate-900">Documentación API</h2>
-        <ul className="mt-3 list-inside list-disc space-y-1 text-sm text-slate-600">
-          <li>
-            Esquema OpenAPI en el servidor:{' '}
-            <code className="rounded bg-slate-100 px-1">/api/schema/</code>, Swagger:{' '}
-            <code className="rounded bg-slate-100 px-1">/api/docs/</code>
-          </li>
-          <li>
-            Convenciones y JWT descritos en el repo del backend (
-            <code className="text-xs">docs/API.md</code>).
-          </li>
-        </ul>
       </div>
     </div>
   )

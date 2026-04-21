@@ -20,7 +20,7 @@ export function AuthGate({ children }: { children: React.ReactNode }) {
 
   if (!ready) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-50 text-slate-600">
+      <div className="flex min-h-screen items-center justify-center bg-background text-muted-foreground">
         Cargando sesión…
       </div>
     )
